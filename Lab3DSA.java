@@ -57,7 +57,7 @@ public class Lab3DSA{
         while(count < size){            
             while (!sc.hasNextInt()) {
                 System.out.println();
-                System.out.print("Invalid input! Please pick between 5 - 15: ");
+                System.out.print("Invalid input! Please pick an integer: ");
                 sc.next();
             }
             
