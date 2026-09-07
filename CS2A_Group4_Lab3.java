@@ -5,14 +5,13 @@ public class CS2A_Group4_Lab3
     public static void main(){
         Scanner sc = new Scanner (System.in);
         int array [] = null;
-        int choice = 0;
 
         int size = size (sc);
         System.out.print(" ");
         array = insert (sc, array, size);
 
         while (true){
-            choice = menu(sc, choice, array);
+            array = menu(sc, array);
         }
     }
     
@@ -48,9 +47,8 @@ public class CS2A_Group4_Lab3
     
     public static int [] insert (Scanner sc, int [] array, int size){
         count = 0;
-        if (array == null){
-            array = new int [size];
-        }
+        array = new int[size];
+        
         System.out.println();
         System.out.print("Enter " + size + " elements: ");
         
@@ -77,7 +75,8 @@ public class CS2A_Group4_Lab3
         return array;
     }
     
-    public static int menu (Scanner sc, int choice, int [] array){
+    public static int [] menu (Scanner sc, int [] array){
+        int choice = 0;
         header("Sorting Algorithms", 50);
         header("Menu", 50);
         System.out.println(" ");
@@ -130,7 +129,7 @@ public class CS2A_Group4_Lab3
             } while (again != 'Y' && again != 'y');
             break;
         }
-        return choice;
+        return array;
     }
     
     public static void one (Scanner sc, int [] array){
