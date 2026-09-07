@@ -47,6 +47,7 @@ public class CS2A_Group4_Lab3
     }
     
     public static int [] insert (Scanner sc, int [] array, int size){
+        count = 0;
         if (array == null){
             array = new int [size];
         }
@@ -111,8 +112,22 @@ public class CS2A_Group4_Lab3
             three (sc, array);
             break;
             case 4:
-            System.out.print("\nProgram terminated. Goodbye!");
-            System.exit(0);
+            char again;
+            do {
+                System.out.print("\nTry Again Y/N? ");
+                again = sc.next().charAt(0);
+                if (again == 'Y') {
+                    clear();
+                    int size = size(sc);
+                    array = insert (sc, array, size);
+                    break;
+                } else if (again == 'N') {
+                    System.out.print("\nProgram Terminated. Goodbye!");
+                    System.exit(0);
+                } else {
+                    System.out.print("\nOnly Y or N are acccepted.");
+                }
+            } while (again != 'Y');
             break;
         }
         return choice;
@@ -120,15 +135,16 @@ public class CS2A_Group4_Lab3
     
     public static void one (Scanner sc, int [] array){
         clear();
-        header("Bubble Sort", 50);
         int [] arr = copyArray(array);
-    
         int labelWidth = ("Sorted Array:").length() + 1;
-    
+        int width = labelWidth + (5 * arr.length);
+        
+        header("Bubble Sort", width);
+        
         System.out.print("Initial Array:");
         printArray(arr);
         System.out.println();
-        System.out.print(String.format("%50s", "").replace(' ', '-'));
+        System.out.print(String.format("%" + width + "s", "").replace(' ', '-'));
     
         int n = arr.length;
     
@@ -152,10 +168,10 @@ public class CS2A_Group4_Lab3
         }
     
         System.out.println(" ");
-        System.out.println(String.format("%50s", "").replace(' ', '-'));
+        System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
         printRow("Sorted Array: ", arr, labelWidth);
         System.out.println(" ");
-        System.out.println(String.format("%50s", "").replace(' ', '-'));
+        System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
     
         System.out.println(" ");
         System.out.print("Press Any Key to Continue..."); 
@@ -167,15 +183,16 @@ public class CS2A_Group4_Lab3
     
     public static void two (Scanner sc, int [] array) {
         clear();
-        header("Selection Sort", 50);
         int [] arr = copyArray(array);
-    
         int labelWidth = ("Sorted Array:").length() + 1;
+        int width = labelWidth + (5 * arr.length);
+        
+        header("Selection Sort", width);
     
         System.out.print("Initial Array:");
         printArray(arr);
         System.out.println();
-        System.out.print(String.format("%50s", "").replace(' ', '-'));
+        System.out.print(String.format("%" + width + "s", "").replace(' ', '-'));
     
         int n = arr.length;
         
@@ -201,10 +218,10 @@ public class CS2A_Group4_Lab3
         }
         
         System.out.println(" ");
-        System.out.println(String.format("%50s", "").replace(' ', '-'));
+        System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
         printRow("Sorted Array: ", arr, labelWidth);
         System.out.println(" ");
-        System.out.println(String.format("%50s", "").replace(' ', '-'));
+        System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
     
         System.out.println(" ");
         System.out.print("Press Any Key to Continue..."); 
@@ -216,15 +233,16 @@ public class CS2A_Group4_Lab3
     
     public static void three (Scanner sc, int [] array) {
         clear();
-        header ("Insertion Sort", 50);
         int [] arr = copyArray(array);
-        
         int labelWidth = ("Sorted Array:").length() + 1;
+        int width = labelWidth + (5 * arr.length);
+        
+        header ("Insertion Sort", width);
         
         System.out.print("Initial Array:");
         printArray(arr);
         System.out.println();
-        System.out.print(String.format("%50s", "").replace(' ', '-'));
+        System.out.print(String.format("%" + width + "s", "").replace(' ', '-'));
         
         int n = arr.length;
         for (int i = 1; i < n; i++) {
@@ -247,11 +265,11 @@ public class CS2A_Group4_Lab3
         }
         
         System.out.println(" ");
-        System.out.println(String.format("%50s", "").replace(' ', '-'));
+        System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
         System.out.print("Sorted Array: ");
         printArray(arr);
         System.out.println(" ");
-        System.out.println(String.format("%50s", "").replace(' ', '-'));
+        System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
         System.out.println(" ");
         System.out.print("Press any key to continue...");
         sc.nextLine();
