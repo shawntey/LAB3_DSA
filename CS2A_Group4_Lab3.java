@@ -116,18 +116,18 @@ public class CS2A_Group4_Lab3
             do {
                 System.out.print("\nTry Again Y/N? ");
                 again = sc.next().charAt(0);
-                if (again == 'Y') {
+                if (again == 'Y' || again == 'y') {
                     clear();
                     int size = size(sc);
                     array = insert (sc, array, size);
                     break;
-                } else if (again == 'N') {
+                } else if (again == 'N' || again == 'n') {
                     System.out.print("\nProgram Terminated. Goodbye!");
                     System.exit(0);
                 } else {
                     System.out.print("\nOnly Y or N are acccepted.");
                 }
-            } while (again != 'Y');
+            } while (again != 'Y' && again != 'y');
             break;
         }
         return choice;
