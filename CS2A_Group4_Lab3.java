@@ -28,7 +28,7 @@ public class CS2A_Group4_Lab3
 
         size = sc.nextInt();
 
-        while (size < 5 || size > 15){
+        while (size <= 5 || size >= 15){
             System.out.println(" ");
             System.out.print("Invalid input! Please pick between 5 - 15: ");
             while (!sc.hasNextInt()){
@@ -39,7 +39,7 @@ public class CS2A_Group4_Lab3
             size = sc.nextInt();
         }
 
-        if (size >= 5 && size <= 15){
+        if (size > 5 && size < 15){
             System.out.print("Array with " + size + " slots successfully created!");
             System.out.println();
         }
