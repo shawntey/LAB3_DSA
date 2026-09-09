@@ -55,7 +55,7 @@ public class CS2A_Group4_Lab3
         while(count < arraySize){            
             while (!sc.hasNextInt()) {
                 System.out.println();
-                System.out.print("Invalid input! Please pick between 5 - 15: ");
+                System.out.print("Invalid input! Please pick an integer: ");
                 sc.next();
             }
             
