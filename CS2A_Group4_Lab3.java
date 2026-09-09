@@ -45,14 +45,14 @@ public class CS2A_Group4_Lab3
         return size;
     }
     
-    public static int [] insert (Scanner sc, int [] array, int size){
+    public static int [] insert (Scanner sc, int [] arr, int arraySize){
         count = 0;
-        array = new int[size];
+        arr = new int[arraySize];
         
         System.out.println();
-        System.out.print("Enter " + size + " elements: ");
+        System.out.print("Enter " + arraySize + " elements: ");
         
-        while(count < size){            
+        while(count < arraySize){            
             while (!sc.hasNextInt()) {
                 System.out.println();
                 System.out.print("Invalid input! Please pick between 5 - 15: ");
@@ -61,21 +61,21 @@ public class CS2A_Group4_Lab3
             
             int element = sc.nextInt();
                 
-            array[count] = element;
+            arr[count] = element;
             count++;
                 
-            if (count >= size){
+            if (count >= arraySize){
                 System.out.println("Array is now full! Press any key to continue...");
                 sc.nextLine();
                 sc.nextLine();
                 clear();
-                return array;
+                return arr;
                 }
             }
-        return array;
+        return arr;
     }
     
-    public static int [] menu (Scanner sc, int [] array){
+    public static int [] menu (Scanner sc, int [] arr){
         int choice = 0;
         header("Sorting Algorithms", 50);
         header("Menu", 50);
@@ -102,13 +102,13 @@ public class CS2A_Group4_Lab3
         
         switch (choice){
             case 1:
-            one (sc, array);
+            one (sc, arr);
             break;
             case 2:
-            two (sc, array);
+            two (sc, arr);
             break;
             case 3:
-            three (sc, array);
+            three (sc, arr);
             break;
             case 4:
             char again;
@@ -118,7 +118,7 @@ public class CS2A_Group4_Lab3
                 if (again == 'Y' || again == 'y') {
                     clear();
                     int size = size(sc);
-                    array = insert (sc, array, size);
+                    arr = insert (sc, arr, size);
                     break;
                 } else if (again == 'N' || again == 'n') {
                     System.out.print("\nProgram Terminated. Goodbye!");
@@ -129,12 +129,12 @@ public class CS2A_Group4_Lab3
             } while (again != 'Y' && again != 'y');
             break;
         }
-        return array;
+        return arr;
     }
     
-    public static void one (Scanner sc, int [] array){
+    public static void one (Scanner sc, int [] arr){
         clear();
-        int [] arr = copyArray(array);
+        arr = copyArray(arr);
         int labelWidth = ("Sorted Array:").length() + 1;
         int width = labelWidth + (5 * arr.length);
         
@@ -144,33 +144,60 @@ public class CS2A_Group4_Lab3
         printArray(arr);
         System.out.println();
         System.out.print(String.format("%" + width + "s", "").replace(' ', '-'));
+
+        long startTime = System.nanoTime();
     
         int n = arr.length;
+        boolean swapped = false;
+        int iteration = 0;
+        int indexOfLastUnsortedElement = n;
     
-        for (int iteration = 1; iteration <= n - 1; iteration++){
-            for (int i = 0; i < n - 1 - (iteration - 1); i++){
-                int leftElement = arr[i];
-                int rightElement = arr[i+1];
-             
-                if (leftElement > rightElement){
-                    arr[i] = rightElement;
-                    arr[i+1] = leftElement;
-                }
+        do {
+        swapped = false;
+        iteration++;
+
+        for (int i = 0; i < indexOfLastUnsortedElement - 1; i++){
+
+            if (stopIteration(arr)) {
+                    break;
             }
             
-            System.out.println(" ");
-            printRow("Iteration " + iteration + ": ", arr, labelWidth);
-            
-            if (stopIteration(arr)) {
-                        break;
-                }
+            int leftElement = arr[i];
+            int rightElement = arr[i+1];
+
+         
+            if (leftElement > rightElement){
+                arr[i] = rightElement;
+                arr[i+1] = leftElement;
+                swapped = true;
+
+                
+            }
         }
-    
+
+        indexOfLastUnsortedElement--;
+
+        System.out.println(" ");
+        printRow("Iteration " + iteration + ": ", arr, labelWidth);
+
+        if (stopIteration(arr)) {
+                    break;
+            }
+
+    } while (swapped);
+
+        long endTime = System.nanoTime();
+
+        long executionTime
+            = (endTime - startTime) / 1000000;
+        
         System.out.println(" ");
         System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
         printRow("Sorted Array: ", arr, labelWidth);
         System.out.println(" ");
         System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
+
+        System.out.println("Sorting took " + executionTime + "ms");
     
         System.out.println(" ");
         System.out.print("Press Any Key to Continue..."); 
@@ -180,9 +207,9 @@ public class CS2A_Group4_Lab3
         System.out.println(" ");
     }
     
-    public static void two (Scanner sc, int [] array) {
+    public static void two (Scanner sc, int [] arr) {
         clear();
-        int [] arr = copyArray(array);
+        arr = copyArray(arr);
         int labelWidth = ("Sorted Array:").length() + 1;
         int width = labelWidth + (5 * arr.length);
         
@@ -192,6 +219,8 @@ public class CS2A_Group4_Lab3
         printArray(arr);
         System.out.println();
         System.out.print(String.format("%" + width + "s", "").replace(' ', '-'));
+
+        long startTime = System.nanoTime();
     
         int n = arr.length;
         
@@ -215,12 +244,19 @@ public class CS2A_Group4_Lab3
             System.out.println(" ");
             printRow("Iteration " + (i+1) + ": ", arr, labelWidth);
         }
+
+        long endTime = System.nanoTime();
+
+        long executionTime
+            = (endTime - startTime) / 1000000;
         
         System.out.println(" ");
         System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
         printRow("Sorted Array: ", arr, labelWidth);
         System.out.println(" ");
         System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
+
+        System.out.println("Sorting took " + executionTime + "ms");
     
         System.out.println(" ");
         System.out.print("Press Any Key to Continue..."); 
@@ -230,9 +266,9 @@ public class CS2A_Group4_Lab3
         System.out.println(" ");
     }
     
-    public static void three (Scanner sc, int [] array) {
+    public static void three (Scanner sc, int [] arr) {
         clear();
-        int [] arr = copyArray(array);
+        arr = copyArray(arr);
         int labelWidth = ("Sorted Array:").length() + 1;
         int width = labelWidth + (5 * arr.length);
         
@@ -242,6 +278,8 @@ public class CS2A_Group4_Lab3
         printArray(arr);
         System.out.println();
         System.out.print(String.format("%" + width + "s", "").replace(' ', '-'));
+
+        long startTime = System.nanoTime();
         
         int n = arr.length;
         for (int i = 1; i < n; i++) {
@@ -262,6 +300,11 @@ public class CS2A_Group4_Lab3
                 break;
             }
         }
+
+        long endTime = System.nanoTime();
+
+        long executionTime
+            = (endTime - startTime) / 1000000;
         
         System.out.println(" ");
         System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
@@ -270,6 +313,9 @@ public class CS2A_Group4_Lab3
         System.out.println(" ");
         System.out.println(String.format("%" + width + "s", "").replace(' ', '-'));
         System.out.println(" ");
+
+        System.out.println("Sorting took " + executionTime + "ms");
+
         System.out.print("Press any key to continue...");
         sc.nextLine();
         sc.nextLine();
@@ -287,24 +333,24 @@ public class CS2A_Group4_Lab3
         return true;
     }
     
-    public static void printRow (String label, int [] array, int labelWidth){
+    public static void printRow (String label, int [] arr, int labelWidth){
             System.out.printf("%-" + labelWidth + "s", label);
-            printArray(array);
+            printArray(arr);
     }
 
-    public static int [] copyArray (int [] array){
-        int [] copy = new int[array.length];
-        for (int i = 0; i < array.length; i++){
-            copy[i] = array[i];
+    public static int [] copyArray (int [] arr){
+        int [] copy = new int[arr.length];
+        for (int i = 0; i < arr.length; i++){
+            copy[i] = arr[i];
         }
         return copy;
     }
 
-    public static void printArray (int [] array){
+    public static void printArray (int [] arr){
         System.out.print(" ");
-        for (int i = 0; i < array.length; i++){
-            System.out.printf("%4d", array[i]);
-            if (i < array.length - 1){
+        for (int i = 0; i < arr.length; i++){
+            System.out.printf("%4d", arr[i]);
+            if (i < arr.length - 1){
                 System.out.print(",");
             }
         }
