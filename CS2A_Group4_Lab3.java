@@ -157,10 +157,6 @@ public class CS2A_Group4_Lab3
         iteration++;
 
         for (int i = 0; i < indexOfLastUnsortedElement - 1; i++){
-
-            if (stopIteration(arr)) {
-                    break;
-            }
             
             int leftElement = arr[i];
             int rightElement = arr[i+1];
